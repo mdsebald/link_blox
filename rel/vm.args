@@ -1,0 +1,7 @@
+-sname LinkBlox
+-setcookie LinkBlox_cookie
+
+## Dont Start the Elixir shell
+-noshell
+## -user Elixir.IEx.CLI
+## -extra --no-halt

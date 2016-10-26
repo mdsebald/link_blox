@@ -1,0 +1,11 @@
+127.0.0.1       localhost
+::1             localhost ip6-localhost ip6-loopback
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
+
+127.0.1.1       raspi-3
+192.168.1.126   raspi-1.shiloh  raspi-1
+192.168.1.132   raspi-3.shiloh  raspi-3
+192.168.1.107   ubuntu-1.shiloh ubuntu-1
+192.168.1.126   nerves-c1a8.shiloh  nerves-c1a8
+
