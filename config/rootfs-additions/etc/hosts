@@ -7,7 +7,7 @@ ff02::2         ip6-allrouters
 192.168.1.132   raspi-3.shiloh  raspi-3
 192.168.1.107   ubuntu-1.shiloh ubuntu-1
 192.168.1.140   ubuntu-2.shiloh ubuntu-2
-192.168.1.146   ubuntu-3.shilog ubuntu-3
+192.168.1.146   ubuntu-3.shiloh ubuntu-3
 192.168.1.127   nerves-c1a8.shiloh  nerves-c1a8
 192.168.1.132   nerves-84f0.shiloh  nerves-84f0
 
