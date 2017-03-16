@@ -7,13 +7,13 @@ defmodule NervesLinkBlox.Mixfile do
     [app: :nerves_linkblox,
      version: "0.0.1",
      target: @target,
-     archives: [nerves_bootstrap: "~> 0.2.1"],
+     archives: [nerves_bootstrap: "~> 0.3.0"],
      deps_path: "deps/#{@target}",
      build_path: "_build/#{@target}",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     deps: deps ++ system(@target)]
+     aliases: aliases(),
+     deps: deps() ++ system(@target)]
   end
 
   # Configuration for the OTP application.
@@ -30,13 +30,13 @@ defmodule NervesLinkBlox.Mixfile do
   end
 
   def deps do
-    [{:nerves, "~> 0.3.0"},
+    [{:nerves, "~> 0.5.0"},
      {:nerves_start_network, github: "mdsebald/nerves_start_network"},
      {:LinkBlox, github: "mdsebald/LinkBlox"}]
   end
 
   def system(target) do
-    [{:"nerves_system_#{target}", ">= 0.0.0"}]
+    [{:"nerves_system_#{target}", "~> 0.11.0"}]
   end
 
   def aliases do
