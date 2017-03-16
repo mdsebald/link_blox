@@ -24,7 +24,7 @@ defmodule NervesLinkBlox.Mixfile do
      applications: [:logger, 
                     :nerves_start_network,
                     :nerves,
-                    :nerves_system_br, :nerves_toolchain, :nerves_system,  
+                    :nerves_system_br,  
                     :erlang_ale,
                     :LinkBlox]]
   end
