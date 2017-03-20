@@ -26,7 +26,7 @@ defmodule NervesLinkBlox.Mixfile do
   # Configuration for the OTP application.
   #
   # Type `mix help compile.app` for more information.
-  def application, do application(@target)
+  def application, do: application(@target)
 
   # Specify target specific application configurations
   # It is common that the application start function will start and supervise
