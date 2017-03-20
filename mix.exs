@@ -67,7 +67,7 @@ defmodule NervesLinkBlox.Mixfile do
   # Specify target specific dependencies
   def deps("host"), do: []
   def deps(target) do
-    [{:nerves_runtime, "~> 0.1.0"},
+    [
      {:"nerves_system_#{target}", "~> 0.11.0", runtime: true},
      {:nerves_start_network, github: "mdsebald/nerves_start_network"},
      {:LinkBlox, github: "mdsebald/LinkBlox"}]
