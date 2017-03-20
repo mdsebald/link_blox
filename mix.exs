@@ -10,7 +10,7 @@ defmodule NervesLinkBlox.Mixfile do
   """, :reset])
 
   def project do
-    [app: :nerves_linkblox,
+    [app: :nerves_link_blox,
      version: "0.1.0",
      elixir: "~> 1.4.0",
      target: @target,
