@@ -60,7 +60,7 @@ defmodule NervesLinkBlox.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   def deps do
-    [{:nerves, "~> 0.5.0"}, runtime: false] ++
+    [{:nerves, "~> 0.5.0"}, runtime: true] ++
     deps(@target)
   end
  
@@ -68,7 +68,7 @@ defmodule NervesLinkBlox.Mixfile do
   def deps("host"), do: []
   def deps(target) do
     [{:nerves_runtime, "~> 0.1.0"},
-     {:"nerves_system_#{target}", "~> 0.11.0", runtime: false},
+     {:"nerves_system_#{target}", "~> 0.11.0", runtime: true},
      {:nerves_start_network, github: "mdsebald/nerves_start_network"},
      {:LinkBlox, github: "mdsebald/LinkBlox"}]
   end
