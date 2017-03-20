@@ -60,7 +60,7 @@ defmodule NervesLinkBlox.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   def deps do
-    [{:nerves, "~> 0.5.0"}, runtime: true] ++
+    [{:nerves, "~> 0.5.0", runtime: true}] ++
     deps(@target)
   end
  
