@@ -1,7 +1,18 @@
 -sname LinkBlox
 -setcookie LinkBlox_cookie
 
-## Dont Start the Elixir shell
--noshell
-## -user Elixir.IEx.CLI
-## -extra --no-halt
++K true
++A30
+
+## Don't Start the Elixir shell
+# -noshell
+
+## Start the Elixir shell
+-user Elixir.IEx.CLI
+-extra --no-halt
+
+# Optionally run a program if the Erlang VM exits
+--run-on-exit /bin/sh
+
+# Hang the board rather than rebooting when Erlang exits
+#--hang-on-exit
