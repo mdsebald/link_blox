@@ -1,4 +1,4 @@
-defmodule NervesLinkBlox do
+defmodule NervesLinkBlox.Application do
   use Application
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
@@ -8,17 +8,12 @@ defmodule NervesLinkBlox do
 
     # Define workers and child supervisors to be supervised
     children = [
-      # worker(NervesLinkblox.Worker, [arg1, arg2, arg3]),
+      # worker(NervesLinkBlox.Worker, [arg1, arg2, arg3]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: NervesLinkblox.Supervisor]
+    opts = [strategy: :one_for_one, name: NervesLinkBlox.Supervisor]
     Supervisor.start_link(children, opts)
-
-    # Just start up network interface, for now
-    # {_, _} = Nerves.Networking.setup :eth0
-    # {:ok, self}
   end
-
 end

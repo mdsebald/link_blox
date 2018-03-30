@@ -1,6 +1,6 @@
-defmodule NervesLinkbloxTest do
+defmodule NervesLinkBloxTest do
   use ExUnit.Case
-  doctest NervesLinkblox
+  doctest NervesLinkBlox
 
   test "the truth" do
     assert 1 + 1 == 2

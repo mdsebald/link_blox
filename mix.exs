@@ -4,19 +4,20 @@ defmodule NervesLinkBlox.Mixfile do
   @target System.get_env("MIX_TARGET") || "host"
 
   Mix.shell.info([:green, """
-  Env
+  Mix environment
     MIX_TARGET:   #{@target}
     MIX_ENV:      #{Mix.env}
   """, :reset])
 
   def project do
     [app: :nerves_link_blox,
-     version: "0.1.0",
-     elixir: "~> 1.4.0",
+     version: "0.3.0",
+     elixir: "~> 1.4",
      target: @target,
-     archives: [nerves_bootstrap: "~> 0.3.0"],
+     archives: [nerves_bootstrap: "~> 0.8.2"],
      deps_path: "deps/#{@target}",
      build_path: "_build/#{@target}",
+     lockfile: "mix.lock.#{@target}",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(@target),
@@ -32,21 +33,16 @@ defmodule NervesLinkBlox.Mixfile do
   # It is common that the application start function will start and supervise
   # applications which could cause the host to fail. Because of this, we only
   # invoke NervesLinkBlox.start/2 when running on a target.
+
   def application("host") do
-    [extra_applications: [:logger, 
-                          :nerves_start_network,
-                          :nerves,
-                          :nerves_system_br,  
-                          :erlang_ale,
-                          :LinkBlox]]
+    [extra_applications: [:logger
+                          ]]
   end
   def application(_target) do
-   [mod: {NervesLinkBlox, []},
-     extra_applications: [:logger, 
-                          :nerves_start_network,
-                          :nerves,
-                          :nerves_system_br,  
-                          :erlang_ale,
+     [mod: {NervesLinkBlox.Application, []},
+     extra_applications: [:logger,
+                          :nerves_ntp,
+                          :nerves_init_gadget,
                           :LinkBlox]]
   end
 
@@ -60,24 +56,37 @@ defmodule NervesLinkBlox.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   def deps do
-    [{:nerves, "~> 0.5.0", runtime: true}] ++
     deps(@target)
   end
- 
+
   # Specify target specific dependencies
   def deps("host"), do: []
   def deps(target) do
     [
-     {:"nerves_system_#{target}", "~> 0.11.0", runtime: true},
-     {:nerves_start_network, github: "mdsebald/nerves_start_network"},
-     {:LinkBlox, github: "mdsebald/LinkBlox"}]
+      {:bootloader, "~> 0.1.3"},
+      {:nerves_init_gadget, "~> 0.2"},
+      {:nerves_ntp, "~> 0.1.0"},
+      {:LinkBlox, github: "mdsebald/LinkBlox"}
+    ] ++ system(target)
   end
+
+  def system("rpi"), do: [{:nerves_system_rpi, ">= 0.0.0", runtime: false}]
+  def system("rpi0"), do: [{:nerves_system_rpi0, ">= 0.0.0", runtime: false}]
+  def system("rpi2"), do: [{:nerves_system_rpi2, ">= 0.0.0", runtime: false}]
+  def system("rpi3"), do: [{:nerves_system_rpi3, ">= 0.0.0", runtime: false}]
+  def system("bbb"), do: [{:nerves_system_bbb, ">= 0.0.0", runtime: false}]
+  def system("linkit"), do: [{:nerves_system_linkit, ">= 0.0.0", runtime: false}]
+  def system("ev3"), do: [{:nerves_system_ev3, ">= 0.0.0", runtime: false}]
+  def system("qemu_arm"), do: [{:nerves_system_qemu_arm, ">= 0.0.0", runtime: false}]
+  def system(target), do: Mix.raise "Unknown MIX_TARGET: #{target}"
 
   # We do not invoke the Nerves Env when running on the Host
   def aliases("host"), do: []
   def aliases(_target) do
     ["deps.precompile": ["nerves.precompile", "deps.precompile"],
      "deps.loadpaths":  ["deps.loadpaths", "nerves.loadpaths"]]
+    |> Nerves.Bootstrap.add_aliases()
   end
 
 end
+
