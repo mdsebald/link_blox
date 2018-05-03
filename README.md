@@ -1,4 +1,4 @@
-# NervesLinkBlox
+# LinkBlox
 
 ## Targets
 
