@@ -12,9 +12,9 @@ defmodule NervesLinkBlox.Mixfile do
   def project do
     [app: :nerves_link_blox,
      version: "0.3.0",
-     elixir: "~> 1.4",
+     elixir: "~> 1.6",
      target: @target,
-     archives: [nerves_bootstrap: "~> 0.8.2"],
+     archives: [nerves_bootstrap: "~> 1.0.0-rc.3"],
      deps_path: "deps/#{@target}",
      build_path: "_build/#{@target}",
      lockfile: "mix.lock.#{@target}",
@@ -35,13 +35,12 @@ defmodule NervesLinkBlox.Mixfile do
   # invoke NervesLinkBlox.start/2 when running on a target.
 
   def application("host") do
-    [extra_applications: [:logger
-                          ]]
+     [mod: {NervesLinkBlox.Application, []},
+      extra_applications: []]
   end
   def application(_target) do
      [mod: {NervesLinkBlox.Application, []},
      extra_applications: [:logger,
-                          :nerves_ntp,
                           :nerves_init_gadget,
                           :LinkBlox]]
   end
@@ -60,12 +59,15 @@ defmodule NervesLinkBlox.Mixfile do
   end
 
   # Specify target specific dependencies
-  def deps("host"), do: []
+  def deps("host"), do: 
+    [
+      {:LinkBlox, github: "mdsebald/LinkBlox"}
+    ]
   def deps(target) do
     [
-      {:bootloader, "~> 0.1.3"},
-      {:nerves_init_gadget, "~> 0.2"},
-      {:nerves_ntp, "~> 0.1.0"},
+      {:shoehorn, "~> 0.2"},
+      {:nerves_init_gadget, "~> 0.3.0"},
+      {:nerves_ntp, "~> 0.1.0", runtime: false},
       {:LinkBlox, github: "mdsebald/LinkBlox"}
     ] ++ system(target)
   end

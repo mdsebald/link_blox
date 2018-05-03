@@ -13,10 +13,10 @@ config :nerves, :firmware,
   rootfs_overlay: "config/rootfs_overlay"
 #   fwup_conf: "config/fwup.conf"
 
-# Use bootloader to start the main application. See the bootloader
+# Use shoehorn to start the main application. See the shoehorn
 # docs for separating out critical OTP applications such as those
 # involved with firmware updates.
-config :bootloader,
+config :shoehorn,
   init: [:nerves_runtime, :nerves_init_gadget],
   app: :nerves_link_blox
 

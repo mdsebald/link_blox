@@ -4,16 +4,19 @@ defmodule NervesLinkBlox.Application do
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
-    import Supervisor.Spec, warn: false
+    #import Supervisor.Spec, warn: false
 
     # Define workers and child supervisors to be supervised
-    children = [
-      # worker(NervesLinkBlox.Worker, [arg1, arg2, arg3]),
-    ]
+    #children = [
+    #  # worker(NervesLinkBlox.Worker, [arg1, arg2, arg3]),
+    #]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: NervesLinkBlox.Supervisor]
-    Supervisor.start_link(children, opts)
+    #opts = [strategy: :one_for_one, name: NervesLinkBlox.Supervisor]
+    #Supervisor.start_link(children, opts)
+    receive do
+      {:ok, _sender, _message} -> :ok
+    end     
   end
 end

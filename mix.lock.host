@@ -1,2 +1,8 @@
-%{"distillery": {:hex, :distillery, "1.5.2", "eec18b2d37b55b0bcb670cf2bcf64228ed38ce8b046bb30a9b636a6f5a4c0080", [], [], "hexpm"},
-  "nerves": {:hex, :nerves, "0.7.5", "3aa6a336b2ad6c1c9589cc2b577511b3c4c375c1ba6c533ab9f88adb8c21f0c3", [], [{:distillery, "~> 1.4", [hex: :distillery, repo: "hexpm", optional: false]}], "hexpm"}}
+%{
+  "LinkBlox": {:git, "https://github.com/mdsebald/LinkBlox.git", "b59ec25aa704beefed6dc8b751141c66e5c20369", []},
+  "emqttc": {:git, "https://github.com/emqtt/emqttc.git", "fafdac625e072fcb87a593a844e2288aa833cba3", [ref: "master"]},
+  "erlang_ale": {:git, "https://github.com/esl/erlang_ale.git", "37827e2c5ccc745c4eb5ab966b057b0c21ed920e", [ref: "master"]},
+  "gen_logger": {:git, "https://github.com/emqtt/gen_logger.git", "e3c9c60b153642193319c793501b10c263d76477", [branch: "master"]},
+  "goldrush": {:git, "https://github.com/basho/goldrush.git", "8f1b715d36b650ec1e1f5612c00e28af6ab0de82", [tag: "0.1.9"]},
+  "lager": {:git, "https://github.com/basho/lager.git", "81eaef0ce98fdbf64ab95665e3bc2ec4b24c7dac", [branch: "master"]},
+}

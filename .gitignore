@@ -9,3 +9,9 @@
 
 # Generate on crash by the VM
 erl_crash.dump
+
+# Ignore log files
+/log
+
+# Don't put ssh keys in public repo
+/config/rootfs_overlay/etc/ssh
