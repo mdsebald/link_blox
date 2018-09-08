@@ -1,4 +1,4 @@
-defmodule NervesLinkBlox.Application do
+defmodule LinkBlox.Application do
   use Application
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html

@@ -9,8 +9,7 @@ use Mix.Config
 # to add files to the root filesystem or modify the firmware
 # archive.
 
-config :nerves, :firmware,
-  rootfs_overlay: "config/rootfs_overlay"
+config :nerves, :firmware, rootfs_overlay: "config/rootfs_overlay"
 #   fwup_conf: "config/fwup.conf"
 
 # Use shoehorn to start the main application. See the shoehorn
@@ -18,12 +17,16 @@ config :nerves, :firmware,
 # involved with firmware updates.
 config :shoehorn,
   init: [:nerves_runtime, :nerves_init_gadget],
-  app: :nerves_link_blox
+  app: :link_blox
 
+# Allows over the air updates via SSH.
 config :nerves_firmware_ssh,
   authorized_keys: [
     File.read!(Path.join(System.user_home!, ".ssh/id_rsa.pub"))
   ]
+
+# Allows for tailing of logs.
+config :logger, backends: [RingLogger]
 
 config :nerves_network,
   regulatory_domain: "US"
@@ -38,17 +41,6 @@ config :nerves_network, :default,
   ],
   eth0: [
     ipv4_address_method: :dhcp
-  ]
-
-# ntpd binary to use
-config :nerves_ntp, :ntpd, "/usr/sbin/ntpd"
- 
-# servers to sync time from
-config :nerves_ntp, :servers, [
-    "0.pool.ntp.org",
-    "1.pool.ntp.org", 
-    "2.pool.ntp.org", 
-    "3.pool.ntp.org"
   ]
 
 

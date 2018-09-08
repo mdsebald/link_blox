@@ -1,4 +1,4 @@
-defmodule NervesLinkBlox.Mixfile do
+defmodule LinkBlox.Mixfile do
   use Mix.Project
 
   @target System.get_env("MIX_TARGET") || "host"
@@ -10,17 +10,17 @@ defmodule NervesLinkBlox.Mixfile do
   """, :reset])
 
   def project do
-    [app: :nerves_link_blox,
-     version: "0.3.0",
+    [app: :link_blox,
+     version: "0.5.0",
      elixir: "~> 1.6",
      target: @target,
-     archives: [nerves_bootstrap: "~> 1.0.0-rc.3"],
+     archives: [nerves_bootstrap: "~> 1.2.0"],
      deps_path: "deps/#{@target}",
      build_path: "_build/#{@target}",
      lockfile: "mix.lock.#{@target}",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     aliases: aliases(@target),
+     aliases: [loadconfig: [&bootstrap/1]],
      deps: deps()]
   end
 
@@ -35,14 +35,14 @@ defmodule NervesLinkBlox.Mixfile do
   # invoke NervesLinkBlox.start/2 when running on a target.
 
   def application("host") do
-     [mod: {NervesLinkBlox.Application, []},
+     [mod: {LinkBlox.Application, []},
       extra_applications: []]
   end
   def application(_target) do
-     [mod: {NervesLinkBlox.Application, []},
+     [mod: {LinkBlox.Application, []},
      extra_applications: [:logger,
                           :nerves_init_gadget,
-                          :LinkBlox]]
+                          :link_blox_app]]
   end
 
   # Dependencies can be Hex packages:
@@ -61,14 +61,14 @@ defmodule NervesLinkBlox.Mixfile do
   # Specify target specific dependencies
   def deps("host"), do: 
     [
-      {:LinkBlox, github: "mdsebald/LinkBlox"}
+      {:link_blox_app, github: "mdsebald/link_blox_app"}
     ]
   def deps(target) do
     [
       {:shoehorn, "~> 0.2"},
       {:nerves_init_gadget, "~> 0.3.0"},
-      {:nerves_ntp, "~> 0.1.0", runtime: false},
-      {:LinkBlox, github: "mdsebald/LinkBlox"}
+      {:nerves_time, "~> 0.2"},
+      {:link_blox_app, github: "mdsebald/link_blox_app"}
     ] ++ system(target)
   end
 
@@ -90,5 +90,9 @@ defmodule NervesLinkBlox.Mixfile do
     |> Nerves.Bootstrap.add_aliases()
   end
 
+  defp bootstrap(args) do
+    Application.start(:nerves_bootstrap)
+    Mix.Task.run("loadconfig", args)
+  end
 end
 

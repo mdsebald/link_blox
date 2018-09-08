@@ -4,7 +4,7 @@
 ##  The cookie needs to be configured prior to vm boot for
 ##  for read only filesystem.
 
-# -name nerves_link_blox@0.0.0.0
+# -name link_blox@0.0.0.0
 #-setcookie AqED458DBaX/EU0wBd7hWpHtuTXjAlfXU5def4Hp79A8jWrtgnrLGuc4S44q2zlp
 -sname LinkBlox
 -setcookie LinkBlox_cookie
